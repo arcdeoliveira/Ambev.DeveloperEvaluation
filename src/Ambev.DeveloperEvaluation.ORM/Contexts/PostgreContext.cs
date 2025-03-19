@@ -32,7 +32,7 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<PostgreContext>
             .Build();
 
         var builder = new DbContextOptionsBuilder<PostgreContext>();
-        var connectionString = configuration.GetConnectionString("PostgreRead");
+        var connectionString = configuration.GetConnectionString("PostgreConnection");
 
         builder.UseNpgsql(
                connectionString,

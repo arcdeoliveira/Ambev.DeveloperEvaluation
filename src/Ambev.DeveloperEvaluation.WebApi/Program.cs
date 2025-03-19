@@ -4,7 +4,7 @@ using Ambev.DeveloperEvaluation.Common.Logging;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.IoC;
-using Ambev.DeveloperEvaluation.ORM;
+using Ambev.DeveloperEvaluation.ORM.Contexts;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +29,9 @@ public class Program
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<DefaultContext>(options =>
+            builder.Services.AddDbContext<PostgreContext>(options =>
                 options.UseNpgsql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
+                    builder.Configuration.GetConnectionString("PostgreConnection"),
                     b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
                 )
             );
