@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
-    public class Adress : BasePostgreEntity<short>
+    public class Adress : BaseRelationalDatabaseEntity<short>
     {
         public Adress() { }
 

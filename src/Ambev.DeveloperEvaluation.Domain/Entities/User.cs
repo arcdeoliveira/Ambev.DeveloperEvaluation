@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities;
 /// Represents a user in the system with authentication and profile information.
 /// This entity follows domain-driven design principles and includes business rules validation.
 /// </summary>
-public class User : BasePostgreEntity<Guid>, IUser
+public class User : BaseRelationalDatabaseEntity<Guid>, IUser
 {
     /// <summary>
     /// Gets the user's full name.
@@ -51,16 +51,6 @@ public class User : BasePostgreEntity<Guid>, IUser
     public UserStatus Status { get; set; }
 
     /// <summary>
-    /// Gets the date and time when the user was created.
-    /// </summary>
-    public DateTime CreatedAt { get; set; }
-
-    /// <summary>
-    /// Gets the date and time of the last update to the user's information.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
-    /// <summary>
     /// Gets the unique identifier of the user.
     /// </summary>
     /// <returns>The user's ID as a string.</returns>
@@ -81,10 +71,7 @@ public class User : BasePostgreEntity<Guid>, IUser
     /// <summary>
     /// Initializes a new instance of the User class.
     /// </summary>
-    public User()
-    {
-        CreatedAt = DateTime.UtcNow;
-    }
+    public User() { }
 
     /// <summary>
     /// Performs validation of the user entity using the UserValidator rules.
@@ -121,7 +108,7 @@ public class User : BasePostgreEntity<Guid>, IUser
     public void Activate()
     {
         Status = UserStatus.Active;
-        UpdatedAt = DateTime.UtcNow;
+        AlterDateUpdate();
     }
 
     /// <summary>
@@ -131,7 +118,7 @@ public class User : BasePostgreEntity<Guid>, IUser
     public void Deactivate()
     {
         Status = UserStatus.Inactive;
-        UpdatedAt = DateTime.UtcNow;
+        AlterDateUpdate();
     }
 
     /// <summary>
@@ -141,6 +128,6 @@ public class User : BasePostgreEntity<Guid>, IUser
     public void Suspend()
     {
         Status = UserStatus.Suspended;
-        UpdatedAt = DateTime.UtcNow;
+        AlterDateUpdate();
     }
 }
