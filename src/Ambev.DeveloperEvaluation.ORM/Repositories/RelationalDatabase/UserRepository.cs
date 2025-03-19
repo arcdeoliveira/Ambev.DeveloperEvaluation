@@ -1,21 +1,22 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.RelationalDatabase;
+using Ambev.DeveloperEvaluation.ORM.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ambev.DeveloperEvaluation.ORM.Repositories;
+namespace Ambev.DeveloperEvaluation.ORM.Repositories.RelationalDatabase;
 
 /// <summary>
 /// Implementation of IUserRepository using Entity Framework Core
 /// </summary>
 public class UserRepository : IUserRepository
 {
-    private readonly DefaultContext _context;
+    private readonly PostgreContext _context;
 
     /// <summary>
     /// Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
-    public UserRepository(DefaultContext context)
+    public UserRepository(PostgreContext context)
     {
         _context = context;
     }
