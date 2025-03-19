@@ -1,6 +1,6 @@
 using MediatR;
 using FluentValidation;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.RelationalDatabase;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 

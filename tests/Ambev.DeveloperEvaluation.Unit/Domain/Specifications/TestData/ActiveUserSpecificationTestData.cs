@@ -24,6 +24,7 @@ public static class ActiveUserSpecificationTestData
     /// </summary>
     private static readonly Faker<User> userFaker = new Faker<User>()
         .CustomInstantiator(f => new User {
+            Id = f.Random.Guid(),
             Email = f.Internet.Email(),
             Password = $"Test@{f.Random.Number(100, 999)}",
             Username = f.Name.FirstName(),
