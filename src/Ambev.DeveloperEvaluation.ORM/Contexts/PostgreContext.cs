@@ -4,13 +4,15 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
-namespace Ambev.DeveloperEvaluation.ORM;
+namespace Ambev.DeveloperEvaluation.ORM.Contexts;
 
-public class DefaultContext : DbContext
+public class PostgreContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Adress> Adresses { get; set; } 
+    public DbSet<Afiliate> Afiliates { get; set; }
 
-    public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
+    public PostgreContext(DbContextOptions<PostgreContext> options) : base(options)
     {
     }
 
@@ -20,23 +22,23 @@ public class DefaultContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 }
-public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
+public class YourDbContextFactory : IDesignTimeDbContextFactory<PostgreContext>
 {
-    public DefaultContext CreateDbContext(string[] args)
+    public PostgreContext CreateDbContext(string[] args)
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var builder = new DbContextOptionsBuilder<DefaultContext>();
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var builder = new DbContextOptionsBuilder<PostgreContext>();
+        var connectionString = configuration.GetConnectionString("PostgreRead");
 
         builder.UseNpgsql(
                connectionString,
-               b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.WebApi")
+               b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
         );
 
-        return new DefaultContext(builder.Options);
+        return new PostgreContext(builder.Options);
     }
 }
