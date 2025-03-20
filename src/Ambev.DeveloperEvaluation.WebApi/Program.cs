@@ -1,13 +1,13 @@
 using Ambev.DeveloperEvaluation.Application;
+using Ambev.DeveloperEvaluation.Application.Notifications;
 using Ambev.DeveloperEvaluation.Common.HealthChecks;
 using Ambev.DeveloperEvaluation.Common.Logging;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
+using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.IoC;
-using Ambev.DeveloperEvaluation.ORM.Contexts;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
@@ -29,11 +29,12 @@ public class Program
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
             builder.Services.AddJwtAuthentication(builder.Configuration);
 
             builder.RegisterDependencies();
 
-            builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ApplicationLayer).Assembly);
+            builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ApplicationLayer).Assembly);            
 
             builder.Services.AddMediatR(cfg =>
             {
@@ -46,7 +47,9 @@ public class Program
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             var app = builder.Build();
-            app.UseMiddleware<ValidationExceptionMiddleware>();
+          
+            app.UseMiddleware<ExceptionUnhandleMiddleware>(); 
+            app.UseMiddleware<ValidationExceptionMiddleware>();      
 
             if (app.Environment.IsDevelopment())
             {

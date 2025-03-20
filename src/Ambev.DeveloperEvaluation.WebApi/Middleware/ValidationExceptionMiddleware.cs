@@ -1,20 +1,21 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Common.Response;
 using FluentValidation;
-using System.Text.Json;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Middleware
 {
-    public class ValidationExceptionMiddleware
+    public class ValidationExceptionMiddleware : ExceptionMiddleware<ApiResponse>
     {
-        private readonly RequestDelegate _next;
+        private ValidationException validationException;
 
-        public ValidationExceptionMiddleware(RequestDelegate next)
+        public ValidationExceptionMiddleware(RequestDelegate next, ILogger<ExceptionUnhandleMiddleware> logger, IHostEnvironment env)
+        : base(next, logger, env) 
         {
-            _next = next;
+            validationException = default!;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public override async Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -22,29 +23,23 @@ namespace Ambev.DeveloperEvaluation.WebApi.Middleware
             }
             catch (ValidationException ex)
             {
-                await HandleValidationExceptionAsync(context, ex);
+                validationException = ex;
+                await HandleExceptionAsync(context, ex);
             }
         }
 
-        private static Task HandleValidationExceptionAsync(HttpContext context, ValidationException exception)
+        internal override ApiResponse GetData(HttpContext context, Exception exception)
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            var message = "Validation Failed";
+            _logger.LogWarning(exception, "Error {statusCode}: {message}", message, context.Response.StatusCode);
 
-            var response = new ApiResponse
+            return new ApiResponse
             {
                 Success = false,
-                Message = "Validation Failed",
-                Errors = exception.Errors
+                Message = message,
+                Errors = validationException.Errors
                     .Select(error => (ValidationErrorDetail)error)
             };
-
-            var jsonOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions));
         }
     }
 }
