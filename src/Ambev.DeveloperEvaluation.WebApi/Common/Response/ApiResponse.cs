@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Common;
+namespace Ambev.DeveloperEvaluation.WebApi.Common.Response;
 
 public class ApiResponse
 {
