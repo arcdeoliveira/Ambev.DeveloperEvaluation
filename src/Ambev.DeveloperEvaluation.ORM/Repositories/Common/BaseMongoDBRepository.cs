@@ -1,12 +1,12 @@
 ﻿using System.Linq.Expressions;
 using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Context;
 using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Common;
-using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Context;
 using MongoDB.Driver;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories.Common
 {
-    public class BaseMongoDBRepository<TDocument> : IBaseMongoDBRepository<TDocument> where TDocument : BaseMongoDBEntity
+    public class BaseMongoDBRepository<TDocument> : IBaseMongoDBRepository<TDocument> where TDocument : BaseDocument
     {
         protected readonly IMongoCollection<TDocument> _collection;
 
@@ -25,24 +25,24 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories.Common
             await _collection.DeleteOneAsync(x => x.Id == id);
         }
 
+        public async Task<long> DocumentExist(string id, CancellationToken cancellationToken)
+        {
+            return await _collection.CountDocumentsAsync(c => c.Id == id, null, cancellationToken);
+        }
+
+        public async Task<long> CountDocuments(FilterDefinition<TDocument> filter, CancellationToken cancellationToken)
+        {
+            return await _collection.CountDocumentsAsync(filter, null, cancellationToken);
+        }
+
         public async Task<IEnumerable<TDocument>> FindAsync(Expression<Func<TDocument, bool>> filter)
         {
             return (IEnumerable<TDocument>)await _collection.FindAsync(filter);
         }
 
-        public Task<IEnumerable<TDocument>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<TDocument> GetByIdAsync(string id)
         {
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
-        }
-
-        public Task<(IEnumerable<TDocument> Items, long TotalCount)> GetPagedAsync(Expression<Func<TDocument, bool>> filter, int pageNumber, int pageSize)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task UpdateAsync(string id, TDocument entity)

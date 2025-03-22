@@ -51,13 +51,13 @@ public class UsersController : BaseController
             return BadRequest(validationResult.Errors);
 
         var command = _mapper.Map<CreateUserCommand>(request);
-        var response = await _mediator.Send(command, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
 
         return Created(string.Empty, new ApiResponseWithData<CreateUserResponse>
         {
             Success = true,
             Message = "User created successfully",
-            Data = _mapper.Map<CreateUserResponse>(response)
+            Data = _mapper.Map<CreateUserResponse>(result)
         });
     }
 

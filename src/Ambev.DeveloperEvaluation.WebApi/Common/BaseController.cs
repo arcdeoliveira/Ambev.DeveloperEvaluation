@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Common.Response;
+﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using Ambev.DeveloperEvaluation.WebApi.Common.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -8,14 +9,16 @@ namespace Ambev.DeveloperEvaluation.WebApi.Common;
 [ApiController]
 public class BaseController : ControllerBase
 {
-    protected int GetCurrentUserId() =>
-            int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new NullReferenceException());
+    protected Guid GetCurrentUserId() =>
+            Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new NullReferenceException());
 
     protected string GetCurrentUserEmail() =>
         User.FindFirst(ClaimTypes.Email)?.Value ?? throw new NullReferenceException();
 
     protected IActionResult Ok<T>(T data) =>
-            base.Ok(new ApiResponseWithData<T> { Data = data, Success = true });
+          base.Ok(new ApiResponseWithData<T> { Data = data, Success = true });
+    protected IActionResult Ok<T>(T data, bool sucess, string message, IEnumerable<ValidationErrorDetail> erros) =>
+            base.Ok(new ApiResponseWithData<T> { Data = data, Errors = erros, Message = message, Success = sucess,  });
 
     protected IActionResult Created<T>(string routeName, object routeValues, T data) =>
         base.CreatedAtRoute(routeName, routeValues, new ApiResponseWithData<T> { Data = data, Success = true });

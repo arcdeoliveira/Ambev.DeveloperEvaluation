@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
-public class BaseRelationalDatabaseEntity<T> 
+public class BaseEntity<T> 
 {
     public required T Id { get; set; }
 

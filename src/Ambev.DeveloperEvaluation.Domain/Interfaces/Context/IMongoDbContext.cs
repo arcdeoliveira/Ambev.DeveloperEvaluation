@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Context
+namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Context
 {
     public interface IMongoDbContext
     {

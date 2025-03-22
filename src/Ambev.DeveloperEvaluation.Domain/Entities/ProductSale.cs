@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
-    public class ProductSale : BaseMongoDBEntity
+    public class ProductSale : BaseDocument
     {
         public ProductSale() { }
         

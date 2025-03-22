@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ambev.DeveloperEvaluation.Domain.Common
 {
-    public abstract class BaseMongoDBEntity
+    public abstract class BaseDocument
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -14,5 +14,11 @@ namespace Ambev.DeveloperEvaluation.Domain.Common
 
         [BsonElement("UpdatedAt")]
         public DateTime? UpdatedAt { get; private set; }
+
+
+        public void AlterDateUpdate()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Common;
-using MediatR;
+﻿using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Notifications
 {

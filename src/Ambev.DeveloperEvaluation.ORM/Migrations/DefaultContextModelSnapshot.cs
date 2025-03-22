@@ -40,6 +40,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("Complement");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("Number")
                         .HasMaxLength(2147483647)
                         .HasColumnType("integer")
@@ -50,6 +53,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("Street");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -74,6 +80,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .HasColumnName("Cnpj")
                         .IsFixedLength();
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -85,6 +94,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("Name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

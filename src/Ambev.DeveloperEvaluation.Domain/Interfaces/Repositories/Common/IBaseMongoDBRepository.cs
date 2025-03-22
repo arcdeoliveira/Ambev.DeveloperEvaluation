@@ -1,16 +1,17 @@
 ﻿using System.Linq.Expressions;
 using Ambev.DeveloperEvaluation.Domain.Common;
+using MongoDB.Driver;
 
 namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Common
 {
-    public interface IBaseMongoDBRepository<TEntity> where TEntity : BaseMongoDBEntity
+    public interface IBaseMongoDBRepository<TDocument> where TDocument : BaseDocument
     {
-        Task<TEntity> GetByIdAsync(string id);
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> filter);
-        Task<(IEnumerable<TEntity> Items, long TotalCount)> GetPagedAsync(Expression<Func<TEntity, bool>> filter, int pageNumber, int pageSize);
-        Task CreateAsync(TEntity entity);
-        Task UpdateAsync(string id, TEntity entity);
+        Task<long> CountDocuments(FilterDefinition<TDocument> filter, CancellationToken cancellationToken);
+        Task<long> DocumentExist(string id, CancellationToken cancellationToken);
+        Task<TDocument> GetByIdAsync(string id);
+        Task<IEnumerable<TDocument>> FindAsync(Expression<Func<TDocument, bool>> filter);
+        Task CreateAsync(TDocument entity);
+        Task UpdateAsync(string id, TDocument entity);
         Task DeleteAsync(string id);
     }
 }

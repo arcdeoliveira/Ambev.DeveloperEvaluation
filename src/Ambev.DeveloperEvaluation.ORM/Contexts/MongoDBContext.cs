@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Context;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Context;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Ambev.DeveloperEvaluation.ORM.Contexts
@@ -8,9 +9,11 @@ namespace Ambev.DeveloperEvaluation.ORM.Contexts
     {
         private readonly IMongoDatabase _database;
 
-        public MongoDBContext(MongoDbSettings settings)
+        public MongoDBContext(IOptions<MongoDbSettings> options)
         {
-            var client = new MongoClient(settings.ConnectionURI);
+            var settings = options.Value;   
+
+            var client = new MongoClient(settings.ConnectionString);
             _database = client.GetDatabase(settings.DatabaseName);
         }
 

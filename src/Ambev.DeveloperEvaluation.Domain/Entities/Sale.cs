@@ -4,7 +4,7 @@ using Ambev.DeveloperEvaluation.Domain.Enums;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
-    public class Sale : BaseMongoDBEntity
+    public class Sale : BaseDocument
     {
         public Sale() { }
 
