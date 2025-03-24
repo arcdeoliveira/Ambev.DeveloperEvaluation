@@ -21,7 +21,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
                 .LessThanOrEqualTo(1000).WithMessage("The maximum for quantity is 1.000 items");
 
             RuleFor(productSale => productSale.ProductId)
-                .GreaterThan(0).WithMessage("ProductId must be informed.");
+                .NotNull().WithMessage("ProductId must be informed.")
+                .Must(x => Guid.TryParse(x, out _)).WithMessage("ProductId is invalid.");
         }
     }
 }

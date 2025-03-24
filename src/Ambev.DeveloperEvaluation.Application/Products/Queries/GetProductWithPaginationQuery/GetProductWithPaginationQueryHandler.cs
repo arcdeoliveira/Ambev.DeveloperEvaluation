@@ -2,7 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Dtos.Products;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Interfaces.Services;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.NonRelational;
 using AutoMapper;
 using MediatR;
 using MongoDB.Bson;

@@ -10,7 +10,7 @@ public class PostgreContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Adress> Adresses { get; set; } 
-    public DbSet<Afiliate> Afiliates { get; set; }
+    public DbSet<Affiliate> Afiliates { get; set; }
 
     public PostgreContext(DbContextOptions<PostgreContext> options) : base(options)
     {

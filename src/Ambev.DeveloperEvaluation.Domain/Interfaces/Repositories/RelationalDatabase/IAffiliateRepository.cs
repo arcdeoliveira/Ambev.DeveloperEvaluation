@@ -3,7 +3,8 @@ using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Common;
 
 namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.RelationalDatabase
 {
-    public interface IAfiliateRepository : IBaseRelationalDatabaseRepository<Afiliate>
+    public interface IAffiliateRepository : IBaseRelationalDatabaseRepository<Affiliate>
     {
+        Task<string?> GetAfiliateNameAsync(short afiliateId, CancellationToken cancellationToken);
     }
 }

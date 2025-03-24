@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Notifications;
 using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Interfaces.Services;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.NonRelational;
 using AutoMapper;
 using MediatR;
 

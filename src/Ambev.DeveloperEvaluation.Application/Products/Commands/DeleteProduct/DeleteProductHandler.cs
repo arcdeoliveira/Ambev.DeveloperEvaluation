@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Notifications;
 using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Interfaces.Services;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.NonRelational;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.Commands.DeleteProduct

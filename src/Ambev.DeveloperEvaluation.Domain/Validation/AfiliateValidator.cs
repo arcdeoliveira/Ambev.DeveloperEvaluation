@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Validation
 {
-    public class AfiliateValidator : AbstractValidator<Afiliate>
+    public class AfiliateValidator : AbstractValidator<Affiliate>
     {
         public AfiliateValidator()
         {

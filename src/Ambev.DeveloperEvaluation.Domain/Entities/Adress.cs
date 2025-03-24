@@ -6,7 +6,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
     {
         public Adress() { }
 
-        public Adress(string street, int number, string complement, short afiliateId, Afiliate afiliate)
+        public Adress(string street, int number, string complement, short afiliateId, Affiliate afiliate)
         {
             Street = street;
             Number = number;
@@ -21,7 +21,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 
 
         public short AfiliateId { get; private set; } = 0;
-        public virtual Afiliate Afiliate { get; private set; } =default!;
+        public virtual Affiliate Afiliate { get; private set; } =default!;
 
 
         public void AlterStreet(string street)
@@ -39,7 +39,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
             Complement = complement;
         }
 
-        public void AlterAfiliate(short afiliateId, Afiliate afiliate)
+        public void AlterAfiliate(short afiliateId, Affiliate afiliate)
         {
             AfiliateId = afiliateId;
             Afiliate = afiliate;

@@ -44,7 +44,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories.Common
             return await _context.Set<TEntity>().AsNoTracking().CountAsync(predicate, cancellationToken);
         }
 
-        public IEnumerable<TEntity> GetAllAsync(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate)
         {
             return _context.Set<TEntity>().AsNoTracking().Where(predicate);
         }

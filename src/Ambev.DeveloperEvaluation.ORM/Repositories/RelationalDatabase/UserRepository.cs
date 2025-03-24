@@ -1,6 +1,8 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.RelationalDatabase;
 using Ambev.DeveloperEvaluation.ORM.Contexts;
+using Ambev.DeveloperEvaluation.ORM.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories.RelationalDatabase;
@@ -8,17 +10,15 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories.RelationalDatabase;
 /// <summary>
 /// Implementation of IUserRepository using Entity Framework Core
 /// </summary>
-public class UserRepository : IUserRepository
+public class UserRepository : BaseRelationalDatabaseRepository<User>, IUserRepository
 {
-    private readonly PostgreContext _context;
 
     /// <summary>
     /// Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
-    public UserRepository(PostgreContext context)
+    public UserRepository(PostgreContext context) : base(context)
     {
-        _context = context;
     }
 
     /// <summary>
@@ -72,5 +72,19 @@ public class UserRepository : IUserRepository
         _context.Users.Remove(user);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
+    }
+
+    public async Task<UserRole> GetUserRoleAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await (from user in _context.Users.AsNoTracking()               
+                where user.Id == userId
+                select user.Role).FirstOrDefaultAsync(cancellationToken);   
+    }
+
+    public async Task<string?> GetUsernameByIdAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await (from user in _context.Users.AsNoTracking()
+                where user.Id == userId
+                select user.Username).FirstOrDefaultAsync(cancellationToken);
     }
 }

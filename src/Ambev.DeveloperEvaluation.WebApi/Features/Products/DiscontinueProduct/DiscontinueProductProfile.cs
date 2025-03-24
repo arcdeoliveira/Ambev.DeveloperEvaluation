@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Products.Commands.DiscontinueProduct;
+using Ambev.DeveloperEvaluation.Application.Sales.Commands.CancelSale;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.DiscontinueProduct

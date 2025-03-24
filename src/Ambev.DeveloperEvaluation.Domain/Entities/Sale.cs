@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Ambev.DeveloperEvaluation.Domain.Common;
+﻿using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
@@ -21,8 +20,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public Guid UserId { get; private set; } = Guid.Empty;
         public int AfiliateId { get; private set; } = 0;
 
-
-        public virtual Collection<ProductSale> Itens { get; private set; } = [];
+        public IEnumerable<ProductSale> ProductSales { get; private set; } = [];
 
 
         public void AlterStatus(SaleStatus status)
@@ -35,19 +33,24 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
             Total = total;
         }
 
-        public void AlterCostumer(Guid userId, User? costumer)
+        public void AlterCostumer(Guid userId)
         {
             UserId = userId;          
         }
 
-        public void AlterAfiliate(short afiliateId, Afiliate? afiliate)
+        public void AlterAffiliate(short afiliateId)
         {
             AfiliateId = afiliateId;
         }
 
-        public void AlterItens(Collection<ProductSale> itens)
+        public void AlterItens(IEnumerable<ProductSale> productSales)
         {
-            Itens = itens;
+            ProductSales = productSales;
         }   
+
+        public void SetTotal()
+        {
+            Total = ProductSales.Where(w => w.Canceled == false).Sum(x => x.Total);
+        }
     }
 }

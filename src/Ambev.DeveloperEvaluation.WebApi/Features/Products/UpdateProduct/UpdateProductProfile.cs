@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Products.Commands.UpdateProduct;
+using Ambev.DeveloperEvaluation.Application.Sales.Commands.UpdateSale;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct

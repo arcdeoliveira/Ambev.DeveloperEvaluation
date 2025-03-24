@@ -2,11 +2,11 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
-    public class Afiliate : BaseEntity<short>
+    public class Affiliate : BaseEntity<short>
     {
-        public Afiliate() { }   
+        public Affiliate() { }   
 
-        public Afiliate(string name , string description, int cnpj, Adress adress) 
+        public Affiliate(string name , string description, int cnpj, Adress adress) 
         {
             Name = name;
             Description = description;

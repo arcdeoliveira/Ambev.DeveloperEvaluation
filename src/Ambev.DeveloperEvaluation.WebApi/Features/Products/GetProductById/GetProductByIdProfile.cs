@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Products.Queries.GetProductByIdQuery;
+using Ambev.DeveloperEvaluation.Application.Sales.Queries.GetSaleByIdQuery;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductById

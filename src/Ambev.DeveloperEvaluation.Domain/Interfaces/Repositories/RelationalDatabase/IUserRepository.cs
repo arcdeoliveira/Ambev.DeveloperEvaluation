@@ -1,11 +1,13 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Enums;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Common;
 
 namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.RelationalDatabase;
 
 /// <summary>
 /// Repository interface for User entity operations
 /// </summary>
-public interface IUserRepository
+public interface IUserRepository : IBaseRelationalDatabaseRepository<User>
 {
     /// <summary>
     /// Creates a new user in the repository
@@ -30,6 +32,9 @@ public interface IUserRepository
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user if found, null otherwise</returns>
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
+
+    Task<string?> GetUsernameByIdAsync(Guid userId, CancellationToken cancellationToken = default);   
+    Task<UserRole> GetUserRoleAsync(Guid userId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user from the repository

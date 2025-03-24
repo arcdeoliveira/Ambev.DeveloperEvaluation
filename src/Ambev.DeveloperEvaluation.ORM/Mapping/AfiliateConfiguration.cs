@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Ambev.DeveloperEvaluation.ORM.Mapping
 {
-    public class AfiliateConfiguration : IEntityTypeConfiguration<Afiliate>
+    public class AfiliateConfiguration : IEntityTypeConfiguration<Affiliate>
     {
-        void IEntityTypeConfiguration<Afiliate>.Configure(EntityTypeBuilder<Afiliate> builder)
+        void IEntityTypeConfiguration<Affiliate>.Configure(EntityTypeBuilder<Affiliate> builder)
         {
             builder.ToTable("Afiliates");
 
