@@ -11,18 +11,20 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
                 .GreaterThan(0).WithMessage("Price must be informed.");
 
             RuleFor(productSale => productSale.UnitDiscount)
-                .GreaterThanOrEqualTo(0).WithMessage("Discount must be informed.");
+                .GreaterThanOrEqualTo(0).When(x => x.Quantity > 0).WithMessage("Discount must be informed.");
             
             RuleFor(productSale => productSale.Total)
-                .GreaterThan(0).WithMessage("Total must be informed.");
+                .GreaterThan(0).When(x => x.UnitPrice > decimal.Zero && x.UnitDiscount >= decimal.Zero).WithMessage("Total must be informed.");
 
             RuleFor(productSale => productSale.Quantity)
                 .GreaterThan(0).WithMessage("Quantity must be informed.")
-                .LessThanOrEqualTo(1000).WithMessage("The maximum for quantity is 1.000 items");
+                .LessThanOrEqualTo(20).WithMessage("The maximum for quantity is 20 items");
 
             RuleFor(productSale => productSale.ProductId)
-                .NotNull().WithMessage("ProductId must be informed.")
-                .Must(x => Guid.TryParse(x, out _)).WithMessage("ProductId is invalid.");
+                .NotNull().WithMessage("ProductId must be informed.");
+
+            RuleFor(productSale => productSale.DateCanceled)
+                .NotNull().When(x => x.Canceled).WithMessage("Date of cancellation must be informed when is canceled.");
         }
     }
 }

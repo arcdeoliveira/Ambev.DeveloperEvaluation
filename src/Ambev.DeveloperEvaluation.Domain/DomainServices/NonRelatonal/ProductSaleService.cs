@@ -33,6 +33,8 @@ namespace Ambev.DeveloperEvaluation.Domain.DomainServices.NonRelatonal
                 var productSale = new ProductSale(product.Price, productSaleDto.Quantity, productSaleDto.ProductId);
                 productSale.SetDiscountByQuantity();
                 productSale.SetTotal();
+
+                productSaleList.Add(productSale);
             }
 
             return productSaleList;  
@@ -40,6 +42,9 @@ namespace Ambev.DeveloperEvaluation.Domain.DomainServices.NonRelatonal
 
         public string GenerateIneligibleProductIdsMessage(IEnumerable<string> productIds,int maxQuantityAllowedToSell)
         {
+            if (!productIds.Any())
+                return string.Empty;
+
             var message = new StringBuilder($"Product(s) not allowed for sale. Maximum {MaxQuantityAllowedToSell} quantities per product: ");
             foreach (var productId in productIds)
             {
@@ -53,7 +58,7 @@ namespace Ambev.DeveloperEvaluation.Domain.DomainServices.NonRelatonal
 
         public string CancelProductsInSale(IEnumerable<string> productIdsToCancel, IEnumerable<ProductSale> productSalesList)
         {
-            if (productIdsToCancel.Any() || productSalesList.Any()) 
+            if (!productIdsToCancel.Any() || !productSalesList.Any()) 
                 return "None product to cancel in the sale.";
 
             var countProductIdNotFound = 0; 

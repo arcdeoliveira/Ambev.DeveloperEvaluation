@@ -26,19 +26,9 @@
             UnitPrice = unitPrice;
         }
 
-        public void AlterUnitDiscount(decimal unitDiscount)
-        {
-            UnitDiscount = unitDiscount;
-        }
-
         public void AlterQuantity(int quantity)
         {
             Quantity = quantity;
-        }
-
-        public void AlterTotal(decimal total)
-        {
-            Total = total;
         }
 
         public void AlterProduct(string productId)

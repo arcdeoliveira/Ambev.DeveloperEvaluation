@@ -8,8 +8,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale
         public UpdateSaleRequestValidator() 
         {
             RuleFor(x => x.Id)
-              .NotEmpty().WithMessage("Sale ID is required")
-              .Must(IsValidGuid).WithMessage("Invalid Sale ID.");
+              .NotEmpty().WithMessage("Sale ID is required");
 
             RuleFor(x => x.AfiliateId)
                 .GreaterThan(0).When(x => x.AfiliateId.HasValue).WithMessage("Invalid Affiliate ID.");
@@ -18,11 +17,6 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale
                 .NotEqual([]).WithMessage("Products are required.")
                 .Must(ProductSaleDto.AllProductIdsValids).WithMessage(x => ProductSaleDto.GetInvalidProductIdsMessage(x.NewProductIds))
                 .Must(ProductSaleDto.AllProductQuantityValid).WithMessage(x => ProductSaleDto.GetInvalidProductQuantitiesMessage(x.NewProductIds));
-        }
-
-        private bool IsValidGuid(string id)
-        {
-            return Guid.TryParse(id, out _);
         }
     }
 }

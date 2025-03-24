@@ -42,7 +42,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Commands.DeleteSale
             }
 
             var saleExist = await _saleService.DocumentExist(command.Id, cancellationToken);
-            if (saleExist)
+            if (!saleExist)
             {
                 var domainNotification = DomainNotification.Create("NotFound", $"Sale with ID {command.Id} not found.");
 

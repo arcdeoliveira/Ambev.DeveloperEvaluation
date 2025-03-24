@@ -8,8 +8,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Queries.GetSaleByIdQuery
         {
 
             RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("Sale ID is required.")
-                .Must(x => Guid.TryParse(x, out _)).WithMessage("Sale ID is invalid.");
+                .NotEmpty().WithMessage("Sale ID is required.");
         }
     }
 }

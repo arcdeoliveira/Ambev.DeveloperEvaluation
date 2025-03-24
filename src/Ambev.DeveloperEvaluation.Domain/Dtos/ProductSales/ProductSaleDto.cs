@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Dtos.ProductSales
 
         public static bool AllProductIdsValids(IEnumerable<ProductSaleDto> products)
         {
-            return products.All(p => Guid.TryParse(p.ProductId, out _));
+            return products.All(p => !string.IsNullOrEmpty(p.ProductId));
         }
 
         public static bool AllProductQuantityValid(IEnumerable<ProductSaleDto> products)
@@ -39,7 +39,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Dtos.ProductSales
 
             return products.Aggregate(stringBuider, (current, product) =>
             {
-                if (Guid.TryParse(product.ProductId, out _))
+                if (string.IsNullOrEmpty(product.ProductId))
                     current.AppendLine($"Product ID {product.ProductId} is invalid.");
                 return current;
             }).ToString();

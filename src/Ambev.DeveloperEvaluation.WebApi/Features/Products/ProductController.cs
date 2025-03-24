@@ -5,12 +5,6 @@ using Ambev.DeveloperEvaluation.Application.Products.Commands.DiscontinueProduct
 using Ambev.DeveloperEvaluation.Application.Products.Commands.UpdateProduct;
 using Ambev.DeveloperEvaluation.Application.Products.Queries.GetProductByIdQuery;
 using Ambev.DeveloperEvaluation.Application.Products.Queries.GetProductWithPaginationQuery;
-using Ambev.DeveloperEvaluation.Application.Sales.Commands.CancelSale;
-using Ambev.DeveloperEvaluation.Application.Sales.Commands.CreateSale;
-using Ambev.DeveloperEvaluation.Application.Sales.Commands.DeleteSale;
-using Ambev.DeveloperEvaluation.Application.Sales.Commands.UpdateSale;
-using Ambev.DeveloperEvaluation.Application.Sales.Queries.GetSaleByIdQuery;
-using Ambev.DeveloperEvaluation.Application.Sales.Queries.GetSaleWithPaginationQuery;
 using Ambev.DeveloperEvaluation.Domain.Dtos.Products;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Common.Response;

@@ -7,8 +7,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale
         public DeleteSaleRequestValidator() 
         {
             RuleFor(x => x.Id)
-           .NotEmpty().WithMessage("Sale ID is required.")
-           .Must(id => Guid.TryParse(id, out _)).WithMessage("Invalid Sale ID.");
+           .NotEmpty().WithMessage("Sale ID is required.");
         }
     }
 }

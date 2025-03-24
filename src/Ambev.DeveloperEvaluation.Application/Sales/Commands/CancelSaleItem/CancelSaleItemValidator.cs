@@ -8,9 +8,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Commands.CancelSaleItem
         public CancelSaleItemValidator()
         {
             RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("Sale ID is required.")
-                .Must(x => Guid.TryParse(x, out _)).WithMessage("Invalid Sale ID.");
-
+                .NotEmpty().WithMessage("Sale ID is required.");
             RuleFor(x => x.ProductIds)
                 .NotEqual([]).WithMessage("Product ID(s) must be informed.")
                 .Must(Verify).WithMessage(x => CreateInvalidProductIdsMessage(x.ProductIds));
@@ -22,7 +20,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Commands.CancelSaleItem
 
         private bool Verify(IEnumerable<string> productIds)
         {
-            return productIds.All(x => Guid.TryParse(x, out _));
+            return productIds.Any(x => !string.IsNullOrEmpty(x));
         }
 
         private static string CreateInvalidProductIdsMessage(IEnumerable<string> productIds)
@@ -31,7 +29,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Commands.CancelSaleItem
 
             return productIds.Aggregate(stringBuider, (current, productId) =>
             {
-                if (Guid.TryParse(productId, out _))
+                if (string.IsNullOrEmpty(productId))
                     current.AppendLine($"Product ID {productId} is invalid.");
                 return current;
             }).ToString();

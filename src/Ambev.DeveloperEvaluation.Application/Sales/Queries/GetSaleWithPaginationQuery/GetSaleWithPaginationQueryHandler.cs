@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Notifications;
+using Ambev.DeveloperEvaluation.Domain.Dtos.ProductSales;
 using Ambev.DeveloperEvaluation.Domain.Dtos.Sales;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Enums;
@@ -102,7 +103,27 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Queries.GetSaleWithPaginat
 
         private ProjectionDefinition<Sale, SalePaginationDto> GetProjectionToPagination() 
         {
-            return Builders<Sale>.Projection.Expression(sale => _mapper.Map<SalePaginationDto>(sale));
+            return Builders<Sale>.Projection.Expression(sale => new SalePaginationDto
+            {
+                Id = sale.Id,
+                CreatedAt = sale.CreatedAt,
+                UpdatedAt = sale.UpdatedAt,
+                Status = sale.Status,
+                Total = sale.Total,
+                AfiliateId = sale.AfiliateId,
+                UserId = sale.UserId,
+                ProductSales = sale.ProductSales.Select(productSale => new ProductSalePaginationDto
+                {
+                    ProductId = productSale.ProductId,
+                    CreatedAt = productSale.CreatedAt,
+                    Canceled = productSale.Canceled,
+                    DateCanceled = productSale.DateCanceled,
+                    UnitPrice = productSale.UnitPrice,
+                    UnitDiscount = productSale.UnitDiscount,
+                    Quantity = productSale.Quantity,
+                    Total = productSale.Total
+                })
+            });
         }
     }
 }

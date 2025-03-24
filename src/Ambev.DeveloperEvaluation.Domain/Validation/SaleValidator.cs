@@ -10,8 +10,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
         {
             RuleFor(sale => sale.CreatedAt)
                 .NotEqual(DateTime.MinValue).WithMessage("Date of creation must be informed.")
-                .NotEqual(DateTime.MaxValue).WithMessage("Date of creation must be informed.")
-                .LessThanOrEqualTo(DateTime.UtcNow).WithMessage("Date must be less than or equal to the current date.");
+                .NotEqual(DateTime.MaxValue).WithMessage("Date of creation must be informed.");
 
             RuleFor(sale => sale.Status).
                 NotEqual(SaleStatus.None).WithMessage("Status must be informed.");
@@ -27,6 +26,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
                 .NotEmpty().WithMessage("UserId must be informed.")
                 .NotEqual(Guid.Empty).WithMessage("UserId must be informed.");
 
+            RuleFor(sale => sale.ProductSales)
+                .NotEqual([]).WithMessage("Products to sale must be informed.");
+
+            RuleForEach(x => x.ProductSales).SetValidator(new ProductSaleValidator());  
         }  
     }
 }

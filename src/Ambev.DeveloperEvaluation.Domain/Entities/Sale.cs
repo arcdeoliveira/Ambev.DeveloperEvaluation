@@ -1,5 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
@@ -17,6 +19,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 
         public SaleStatus Status { get; private set; } = SaleStatus.Ordered;
         public decimal Total { get; private set; } = 0;
+
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid UserId { get; private set; } = Guid.Empty;
         public int AfiliateId { get; private set; } = 0;
 
@@ -26,12 +30,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public void AlterStatus(SaleStatus status)
         {
             Status = status;
-        }   
-
-        public void AlterTotal(decimal total)
-        {
-            Total = total;
-        }
+        }  
 
         public void AlterCostumer(Guid userId)
         {

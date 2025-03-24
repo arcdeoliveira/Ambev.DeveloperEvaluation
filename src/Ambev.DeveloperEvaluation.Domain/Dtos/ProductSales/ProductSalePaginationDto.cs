@@ -8,8 +8,8 @@
         public decimal UnitDiscount { get; set; } = 0;
         public int Quantity { get; set; } = 0;
         public decimal Total { get; set; } = 0;
-        public string CreatedAt { get; set; } = string.Empty;
-        public string Canceled { get; set; } = string.Empty;
-        public string DateCanceled { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; } = DateTime.MinValue;
+        public bool Canceled { get; set; }
+        public DateTime? DateCanceled { get; set; } 
     }
 }

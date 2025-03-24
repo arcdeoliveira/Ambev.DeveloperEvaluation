@@ -15,6 +15,10 @@ namespace Ambev.DeveloperEvaluation.Domain.Common
         [BsonElement("UpdatedAt")]
         public DateTime? UpdatedAt { get; private set; }
 
+        public void AlterId(string id)
+        {
+            Id = id;    
+        }
 
         public void AlterDateUpdate()
         {

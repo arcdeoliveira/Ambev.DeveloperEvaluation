@@ -168,10 +168,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
         }
 
         [HttpPatch("cancel/{id}/itens")]   
-        public async Task<IActionResult> CancelSaleItens([FromRoute] string id, [FromQuery] CancelSaleItemRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CancelSaleItens([FromRoute] string id, [FromBody] IEnumerable<string> productIds, CancellationToken cancellationToken)
         {
-            request.Id = id;    
-
+            var request = new CancelSaleItemRequest(id, productIds);
             var validator = new CancelSaleItemRequestValidator();
             var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
@@ -195,7 +194,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
         }
         
 
-        [Authorize(Policy = "AdminOnly")]
+        [Authorize(Policy = "AdminPolicy")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSale([FromRoute] string id, CancellationToken cancellationToken)
         {
