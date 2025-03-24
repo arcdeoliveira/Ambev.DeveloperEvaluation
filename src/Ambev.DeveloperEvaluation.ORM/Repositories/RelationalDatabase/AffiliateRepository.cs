@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories.RelationalDatabase
 {
-    public class AfiliateRepository : BaseRelationalDatabaseRepository<Affiliate>, IAffiliateRepository
+    public class AffiliateRepository : BaseRelationalDatabaseRepository<Affiliate>, IAffiliateRepository
     {
-        protected AfiliateRepository(PostgreContext context) : base(context)
+        public AffiliateRepository(PostgreContext context) : base(context)
         {
         }
 

@@ -13,7 +13,7 @@ namespace Ambev.DeveloperEvaluation.Domain.DomainServices.NonRelatonal
     {
         private readonly ISaleRepository _saleRepository;
 
-        protected SaleService(ISaleRepository saleRepository) : base(saleRepository)
+        public SaleService(ISaleRepository saleRepository) : base(saleRepository)
         {
             _saleRepository = saleRepository;
         }

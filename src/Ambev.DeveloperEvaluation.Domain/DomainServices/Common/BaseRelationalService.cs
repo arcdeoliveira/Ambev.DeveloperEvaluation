@@ -1,11 +1,10 @@
 ﻿using System.Linq.Expressions;
-using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.Common;
 using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.Common;
 
 namespace Ambev.DeveloperEvaluation.Domain.DomainServices.Common
 {
-    public class BaseRelationalService<TEntity, Ttype> : IBaseRelationalService<TEntity, Ttype> where TEntity : BaseEntity<Ttype>
+    public class BaseRelationalService<TEntity> : IBaseRelationalService<TEntity> where TEntity : class
     {
         private readonly IBaseRelationalDatabaseRepository<TEntity> _baseRepository;
 

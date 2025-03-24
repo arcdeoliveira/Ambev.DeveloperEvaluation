@@ -1,4 +1,4 @@
-﻿namespace Ambev.DeveloperEvaluation.Domain.Common
+﻿namespace Ambev.DeveloperEvaluation.ORM.Settings
 {
     public class MongoDbSettings
     {

@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Common;
 
 namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Services.Common
 {
-    public interface IBaseRelationalService<TEntity, Ttype> where TEntity : BaseEntity<Ttype>
+    public interface IBaseRelationalService<TEntity> where TEntity : class
     {
         void Insert(TEntity entity);
         void Update(TEntity entity);

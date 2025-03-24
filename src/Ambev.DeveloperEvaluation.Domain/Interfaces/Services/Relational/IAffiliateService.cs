@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.Common;
 
 namespace Ambev.DeveloperEvaluation.Domain.Interfaces.Services.Relational
 {
-    public interface IAffiliateService : IBaseRelationalService<Affiliate, short> 
+    public interface IAffiliateService : IBaseRelationalService<Affiliate> 
     {
         Task<string?> GetAfiliateNameAsync(short afiliateId, CancellationToken cancellationToken);
     }

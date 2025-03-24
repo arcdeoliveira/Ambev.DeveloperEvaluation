@@ -6,10 +6,10 @@ using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.Relational;
 
 namespace Ambev.DeveloperEvaluation.Domain.DomainServices.Relational
 {
-    public class UserService : BaseRelationalService<User, Guid>, IUserService
+    public class UserService : BaseRelationalService<User>, IUserService
     {
         private readonly IUserRepository _userRepository;   
-        protected UserService(IUserRepository userRepository) : base(userRepository)
+        public UserService(IUserRepository userRepository) : base(userRepository)
         {
             _userRepository = userRepository;   
         }

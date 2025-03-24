@@ -5,10 +5,10 @@ using Ambev.DeveloperEvaluation.Domain.Interfaces.Services.Relational;
 
 namespace Ambev.DeveloperEvaluation.Domain.DomainServices.Relational
 {
-    public class AffiliateService : BaseRelationalService<Affiliate, short>, IAffiliateService
+    public class AffiliateService : BaseRelationalService<Affiliate>, IAffiliateService
     {
         private readonly IAffiliateRepository _affiliateRepository;
-        protected AffiliateService(IAffiliateRepository repository) : base(repository)
+        public AffiliateService(IAffiliateRepository repository) : base(repository)
         {
             _affiliateRepository = repository;
         }

@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Interfaces.Context;
+﻿using Ambev.DeveloperEvaluation.Domain.Interfaces.Context;
+using Ambev.DeveloperEvaluation.ORM.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

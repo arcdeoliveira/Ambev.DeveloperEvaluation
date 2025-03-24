@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Dtos.Sales;
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Interfaces.Context;
 using Ambev.DeveloperEvaluation.Domain.Interfaces.Repositories.NonRelationalDatabase;
-using Ambev.DeveloperEvaluation.ORM.Contexts;
 using Ambev.DeveloperEvaluation.ORM.Repositories.Common;
 using MongoDB.Driver;
 
@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories.NonRelationalDatabase
     {
         const string COLLECTION_NAME = "sales";
 
-        protected SaleRepository(MongoDBContext context) : base(context, COLLECTION_NAME)
+        public SaleRepository(IMongoDbContext context) : base(context, COLLECTION_NAME)
         {
         }
 
