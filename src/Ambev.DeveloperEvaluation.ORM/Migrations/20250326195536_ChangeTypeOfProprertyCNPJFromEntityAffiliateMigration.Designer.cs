@@ -3,6 +3,7 @@ using System;
 using Ambev.DeveloperEvaluation.ORM.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
     [DbContext(typeof(PostgreContext))]
-    partial class DefaultContextModelSnapshot : ModelSnapshot
+    [Migration("20250326195536_ChangeTypeOfProprertyCNPJFromEntityAffiliateMigration")]
+    partial class ChangeTypeOfProprertyCNPJFromEntityAffiliateMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

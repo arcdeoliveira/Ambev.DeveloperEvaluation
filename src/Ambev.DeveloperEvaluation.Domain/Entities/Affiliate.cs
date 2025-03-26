@@ -6,7 +6,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
     {
         public Affiliate() { }   
 
-        public Affiliate(string name , string description, int cnpj, Adress adress) 
+        public Affiliate(string name , string description, string cnpj, Adress adress) 
         {
             Name = name;
             Description = description;
@@ -16,7 +16,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 
         public string Name { get; private set; } = string.Empty;
         public string Description { get; private set; } = string.Empty;
-        public int Cnpj { get; private set; } = 0;  
+        public string Cnpj { get; private set; } = string.Empty;  
 
         public virtual Adress Adress { get; private set; } = default!;
 
@@ -31,7 +31,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
             Description = description;
         }
 
-        public void AlterCnpj(int cnpj)
+        public void AlterCnpj(string cnpj)
         {
             Cnpj = cnpj;
         }   
